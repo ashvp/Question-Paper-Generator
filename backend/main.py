@@ -1,10 +1,19 @@
 from fastapi import File, Form, UploadFile, APIRouter, FastAPI
 from fastapi.responses import JSONResponse
-from models import QuestionConfig
-from services.pdf_extractor import extract_text_from_pdf, get_chunks_from_text, create_vector_store_from_chunks
-from services.quiz_generator import generate_questions_from_content
+from fastapi.middleware.cors import CORSMiddleware
+from .models import QuestionConfig
+from .services.pdf_extractor import extract_text_from_pdf, get_chunks_from_text, create_vector_store_from_chunks
+from .services.quiz_generator import generate_questions_from_content
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/generate-question-paper/")
 async def generate_question_paper(
@@ -23,9 +32,6 @@ async def generate_question_paper(
         texts = extract_text_from_pdf(pdf.file)
         chunks = get_chunks_from_text(texts)
         vector_store = create_vector_store_from_chunks(chunks)
-        print(texts)
-        print(chunks)
-        print(vector_store)
 
         chunks = vector_store.similarity_search("", k=10)
         content = "\n\n".join([doc.page_content for doc in chunks])[:12000]
