@@ -1,0 +1,51 @@
+CONTENT TO USE:
+{content}
+
+REQUIREMENTS:
+- Educational Level: {Standard}
+- Difficulty: {difficulty}
+- Create {countOfMCQs} multiple choice questions
+- Create {countOfShort} short answer questions  
+- Create {countOfLong} long answer questions
+- Additional notes: {User_defined_notes}
+
+OUTPUT FORMAT:
+Start your response with exactly this structure and fill in the actual questions:
+
+# Examination Paper
+**Class:** {Standard}
+
+## Section A: Multiple Choice Questions
+(Create {countOfMCQs} questions - 1 mark each)
+
+**1.** [Your MCQ question here]
+A) [Option A]
+B) [Option B] 
+C) [Option C]
+D) [Option D]
+
+**2.** [Your MCQ question here]
+A) [Option A]
+B) [Option B]
+C) [Option C] 
+D) [Option D]
+
+## Section B: Short Answer Questions
+(Create {countOfShort} questions - 3 marks each, answer in 3-5 lines)
+
+**1.** [Your short answer question here]
+
+**2.** [Your short answer question here]
+
+## Section C: Long Answer Questions  
+(Create {countOfLong} questions - 5 marks each, answer in 150+ words)
+
+**1.** [Your long answer question here]
+
+**2.** [Your long answer question here]
+
+IMPORTANT: 
+- Only output the exam paper, nothing else
+- Replace [Your question here] with actual questions based on the content
+- Make questions at {difficulty} difficulty level
+- Don't repeat topics across sections
