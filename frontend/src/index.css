@@ -5,5 +5,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 html, body {
-  @apply bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-900 font-sans;
+  @apply bg-gradient-to-br from-blue-200 to-indigo-400 text-gray-900 font-sans;
 }

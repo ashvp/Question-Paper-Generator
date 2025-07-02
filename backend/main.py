@@ -1,9 +1,9 @@
 from fastapi import File, Form, UploadFile, APIRouter, FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from .models import QuestionConfig
-from .services.pdf_extractor import extract_text_from_pdf, get_chunks_from_text, create_vector_store_from_chunks
-from .services.quiz_generator import generate_questions_from_content
+from models import QuestionConfig
+from services.pdf_extractor import extract_text_from_pdf, get_chunks_from_text, create_vector_store_from_chunks
+from services.quiz_generator import generate_questions_from_content
 
 app = FastAPI()
 
