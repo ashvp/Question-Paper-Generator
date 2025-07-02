@@ -57,7 +57,7 @@ const QuestionPaperForm: React.FC = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:9000/generate-question-paper/",
+        `${import.meta.env.VITE_API_URL}/generate-question-paper/`,
         payload,
         {
           headers: {
