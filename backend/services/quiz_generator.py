@@ -13,7 +13,7 @@ load_dotenv(dotenv_path=env_path)
 load_dotenv()
 
 def generate_questions_from_content(content, config) -> str:
-    prompt_path = "backend/prompts/questionPaper.txt"
+    prompt_path = "prompts/questionPaper.txt"
     with open(prompt_path, "r") as file:
         prompt_template = file.read()
     
