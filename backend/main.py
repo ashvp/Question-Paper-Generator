@@ -54,3 +54,6 @@ async def generate_question_paper(
     output = generate_questions_from_content(content, config)
     return JSONResponse(content={"question_paper": output})
 
+@app.get("/health")
+def health_check():
+    return {"status": "Render is Alive"}
