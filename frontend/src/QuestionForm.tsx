@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import "./QuestionForm.css";
 
 interface FormDataType {
   Standard: string;
@@ -24,7 +26,9 @@ const QuestionPaperForm: React.FC = () => {
   });
 
   const [file, setFile] = useState<File | null>(null);
-  const [response, setResponse] = useState<string>("");
+  const [questionPaper, setQuestionPaper] = useState<string>("");
+  const [answerKey, setAnswerKey] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -44,7 +48,9 @@ const QuestionPaperForm: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setResponse("loading");
+    setLoading(true);
+    setQuestionPaper("");
+    setAnswerKey("");
 
     const payload = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -66,23 +72,51 @@ const QuestionPaperForm: React.FC = () => {
           },
         }
       );
-      setResponse(res.data.question_paper);
+      const generatedQuestionPaper = res.data.question_paper;
+      setQuestionPaper(generatedQuestionPaper);
+
+      const answerKeyPayload = new FormData();
+      answerKeyPayload.append("question_paper", generatedQuestionPaper);
+
+      const answerKeyRes = await axios.post(
+        `${import.meta.env.VITE_API_URL}/generate-answer-key/`,
+        answerKeyPayload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setAnswerKey(answerKeyRes.data.answer_key);
     } catch (err) {
       console.error(err);
-      setResponse("Failed to generate question paper.");
+      setQuestionPaper("Failed to generate question paper.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="container py-5">
-      <div className="text-center mb-4">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-4"
+      >
         <h1 className="display-5 fw-bold">Question Paper Generator</h1>
         <p className="text-muted">
           Create customized question papers for any subject and standard
         </p>
-      </div>
+      </motion.div>
 
-      <form onSubmit={handleSubmit} className="card shadow p-4 mb-5">
+      <motion.form
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        onSubmit={handleSubmit}
+        className="card shadow p-4 mb-5"
+      >
         <h4 className="mb-4">Basic Information</h4>
 
         <div className="row g-3">
@@ -196,25 +230,48 @@ const QuestionPaperForm: React.FC = () => {
         <div className="d-grid mt-4">
           <button
             type="submit"
-            disabled={response === "loading"}
+            disabled={loading}
             className="btn btn-primary btn-lg"
           >
-            {response === "loading" ? (
+            {loading ? (
               <span className="spinner-border spinner-border-sm me-2"></span>
             ) : null}
-            {response === "loading"
-              ? "Generating Questions..."
-              : "Generate Question Paper"}
+            {loading
+              ? "Generating..."
+              : "Generate Question Paper & Answer Key"}
           </button>
         </div>
-      </form>
+      </motion.form>
 
-      {response && response !== "loading" && (
-        <div className="card shadow p-4 bg-light">
-          <h4 className="mb-3 text-success">Generated Question Paper</h4>
-          <pre className="text-muted">{response}</pre>
-        </div>
-      )}
+      <AnimatePresence>
+        {questionPaper && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="card shadow p-4 bg-light mb-4"
+          >
+            <h4 className="mb-3 text-success">Generated Question Paper</h4>
+            <pre className="text-muted">{questionPaper}</pre>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {answerKey && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="card shadow p-4 bg-light"
+          >
+            <h4 className="mb-3 text-primary">Answer Key</h4>
+            <pre className="text-muted">{answerKey}</pre>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

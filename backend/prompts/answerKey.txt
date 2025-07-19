@@ -1,0 +1,38 @@
+QUESTION PAPER:
+{question_paper}
+
+REQUIREMENTS:
+- Create a detailed answer key for the provided question paper.
+- For each question, provide the correct answer and a marking scheme.
+- For subjective questions, describe the key points and concepts that should be included in the answer.
+
+OUTPUT FORMAT:
+Start your response with exactly this structure and fill in the actual answers:
+
+# Answer Key
+
+## Section A: Multiple Choice Questions
+**1.** [Correct Option]
+**2.** [Correct Option]
+
+## Section B: Short Answer Questions
+**1.** [Answer with key points]
+   - [Point 1] (1 mark)
+   - [Point 2] (1 mark)
+   - [Point 3] (1 mark)
+
+**2.** [Answer with key points]
+   - [Point 1] (1 mark)
+   - [Point 2] (1 mark)
+   - [Point 3] (1 mark)
+
+## Section C: Long Answer Questions
+**1.** [Detailed answer with key points and concepts]
+   - [Concept 1] (2 marks)
+   - [Concept 2] (2 marks)
+   - [Concept 3] (1 mark)
+
+**2.** [Detailed answer with key points and concepts]
+   - [Concept 1] (2 marks)
+   - [Concept 2] (2 marks)
+   - [Concept 3] (1 mark)

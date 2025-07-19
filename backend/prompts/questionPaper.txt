@@ -5,8 +5,9 @@ REQUIREMENTS:
 - Educational Level: {Standard}
 - Difficulty: {difficulty}
 - Create {countOfMCQs} multiple choice questions
-- Create {countOfShort} short answer questions  
+- Create {countOfShort} short answer questions
 - Create {countOfLong} long answer questions
+- For each question, add a hint about the source of the question from the provided content (e.g., a character name, a lesson name, a specific topic).
 - Additional notes: {User_defined_notes}
 
 OUTPUT FORMAT:
@@ -18,33 +19,33 @@ Start your response with exactly this structure and fill in the actual questions
 ## Section A: Multiple Choice Questions
 (Create {countOfMCQs} questions - 1 mark each)
 
-**1.** [Your MCQ question here]
+**1.** [Your MCQ question here] (Hint: [Your hint here])
 A) [Option A]
-B) [Option B] 
+B) [Option B]
 C) [Option C]
 D) [Option D]
 
-**2.** [Your MCQ question here]
+**2.** [Your MCQ question here] (Hint: [Your hint here])
 A) [Option A]
 B) [Option B]
-C) [Option C] 
+C) [Option C]
 D) [Option D]
 
 ## Section B: Short Answer Questions
 (Create {countOfShort} questions - 3 marks each, answer in 3-5 lines)
 
-**1.** [Your short answer question here]
+**1.** [Your short answer question here] (Hint: [Your hint here])
 
-**2.** [Your short answer question here]
+**2.** [Your short answer question here] (Hint: [Your hint here])
 
-## Section C: Long Answer Questions  
+## Section C: Long Answer Questions
 (Create {countOfLong} questions - 5 marks each, answer in 150+ words)
 
-**1.** [Your long answer question here]
+**1.** [Your long answer question here] (Hint: [Your hint here])
 
-**2.** [Your long answer question here]
+**2.** [Your long answer question here] (Hint: [Your hint here])
 
-IMPORTANT: 
+IMPORTANT:
 - Only output the exam paper, nothing else
 - Replace [Your question here] with actual questions based on the content
 - Make questions at {difficulty} difficulty level

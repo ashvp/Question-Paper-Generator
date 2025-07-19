@@ -22,7 +22,7 @@ def generate_questions_from_content(content, config) -> str:
     prompt = ChatPromptTemplate.from_template(prompt_template)
     chain_input = prompt.format(
         Standard=config['Standard'],
-        content=content[:5000],
+        content=content,
         difficulty=config['difficulty'],
         countOfMCQs=config['countOfMCQs'],
         countOfShort=config['countOfShort'],
