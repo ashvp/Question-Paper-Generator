@@ -70,3 +70,6 @@ urllib3==2.5.0
 uvicorn==0.34.3
 yarl==1.20.1
 zstandard==0.23.0
+sentence-transformers==2.7.0
+transformers==4.46.3
+torch==2.3.1
