@@ -57,7 +57,7 @@ def chunk_text_and_assign_topics(text: str, chunk_size: int = 2000, chunk_overla
 
     # 2. Initialize the LLM for topic generation
     # Using a powerful model for better topic understanding
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.3)
 
     all_chunks = []
     all_metadata = []
