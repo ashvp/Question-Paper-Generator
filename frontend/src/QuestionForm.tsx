@@ -72,6 +72,7 @@ const QuestionPaperForm: React.FC = () => {
           },
         }
       );
+      console.log("Using backend:", import.meta.env.VITE_API_URL);
       const generatedQuestionPaper = res.data.question_paper;
       setQuestionPaper(generatedQuestionPaper);
 

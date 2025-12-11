@@ -2,12 +2,13 @@ from fastapi import File, Form, UploadFile, APIRouter, FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from models import QuestionConfig
-from services.quiz_generator import generate_questions_from_content
-from services.pdf_extractor import extract_text_from_pdf, chunk_text_and_assign_topics, create_vector_store
-from services.answer_key_generator import generate_answer_key_from_question_paper
+from .models import QuestionConfig
+from .services.quiz_generator import generate_questions_from_content
+from .services.pdf_extractor import extract_text_from_pdf, chunk_text_and_assign_topics, create_vector_store
+from .services.answer_key_generator import generate_answer_key_from_question_paper
 
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.embeddings import FastEmbedEmbeddings 
+
 from langchain_community.vectorstores import FAISS
 
 app = FastAPI()
@@ -49,7 +50,7 @@ async def generate_question_paper(
         vector_store = create_vector_store(chunks, metadata)
 
         # 4. Reload the vector store for searching
-        embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+        embeddings = FastEmbedEmbeddings()
         # Allow dangerous deserialization is required for FAISS with older pickle versions
         vector_store = FAISS.load_local("vector_store", embeddings, allow_dangerous_deserialization=True)
 
@@ -59,14 +60,12 @@ async def generate_question_paper(
         unique_topics = sorted(list(set(m["topic_title"] for m in metadata)))
         
         # Calculate how many chunks to get per topic to not exceed a reasonable limit
-        # e.g., if we want ~15 chunks total and have 5 topics, we get 3 per topic.
         total_chunks_to_retrieve = 15
         k_per_topic = max(1, total_chunks_to_retrieve // len(unique_topics)) if unique_topics else 0
 
         print(f"Retrieving {k_per_topic} chunks per topic across {len(unique_topics)} unique topics.")
 
         for topic in unique_topics:
-            # Perform a similarity search filtered by the current topic
             results = vector_store.similarity_search(
                 "Generate questions about this content", 
                 k=k_per_topic, 
