@@ -2,10 +2,10 @@ from fastapi import File, Form, UploadFile, APIRouter, FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from .models import QuestionConfig
-from .services.quiz_generator import generate_questions_from_content
-from .services.pdf_extractor import extract_text_from_pdf, chunk_text_and_assign_topics, create_vector_store
-from .services.answer_key_generator import generate_answer_key_from_question_paper
+from models import QuestionConfig
+from services.quiz_generator import generate_questions_from_content
+from services.pdf_extractor import extract_text_from_pdf, chunk_text_and_assign_topics, create_vector_store
+from services.answer_key_generator import generate_answer_key_from_question_paper
 
 from langchain_community.embeddings import FastEmbedEmbeddings 
 
