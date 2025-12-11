@@ -1,0 +1,88 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+
+# C extensions
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+ENV/
+env.bak/
+
+# Environment variables / secrets
+*.env
+.*.env
+.env.*
+.secrets/
+secret.key
+
+# IDE / Editor files
+.vscode/
+.vscode/*
+.idea/
+*.iml
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+logs/
+log/
+
+# ---- Python tooling ----
+.mypy_cache/
+.pytest_cache/
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+.cache/
+ruff_cache/
+
+# ---- Byte-compiled / temporary ----
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# ---- FastAPI / Uvicorn ----
+# (if you generate hot-reload artifacts)
+uvicorn.log
+
+# ---- Django specific ----
+db.sqlite3
+media/
+staticfiles/
+static_root/
+
+# ---- SQLAlchemy migrations ----
+alembic/versions/*.pyc
+alembic/versions/__pycache__/
+
+# ---- Docker ----
+*.pid
+docker-data/
+
+# ---- Node modules (if using frontend inside backend folder) ----
+node_modules/
+
+# ---- Testing / Reports ----
+.junit/
+pytest_debug.log
+
+.env
+
+vector_store/
